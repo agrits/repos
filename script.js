@@ -20,7 +20,10 @@ class Repo{
     row.appendChild(createCell(this.name))
     row.appendChild(createCell(this.description))
     row.appendChild(createCell(this.updated_at))
-    row.appendChild(createCell(this.clone_url))
+    var a = createLink(this.clone_url)
+    var aCell = createCell('')
+    aCell.appendChild(a)
+    row.appendChild(aCell)
     return row
   }
 }
@@ -46,6 +49,13 @@ function createHeaderCell(content){
 function createRow(){
   tr = document.createElement("tr")
   return tr
+}
+
+function createLink(content){
+  a = document.createElement("a")
+  a.innerText = content
+  a.href = content
+  return a
 }
 
 /** Creates cell for given content */
@@ -88,6 +98,7 @@ function renderUserRepos(user, date, element){
     })
     .catch((error) => {
       alert(`Can't fetch data for ${user}`)
+      console.log(error)
     });
 }
 
